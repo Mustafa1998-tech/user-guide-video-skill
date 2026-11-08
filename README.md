@@ -32,6 +32,7 @@ Python, Playwright/Chromium, Pillow, NumPy, FFmpeg or imageio-ffmpeg, PyAV, an a
 
 - Capture the real interface; do not invent controls or successful operations.
 - Preserve brand identity and editable source material.
+- Follow the skill's arrow specification: red `#D52424`, white outline, target-relative placement, a single eased approach, narration-synchronized cue, still hold, and gentle exit. Sizes/timings are adjustable production defaults.
 - Distinguish animated screenshots from live recordings.
 - Use original or licensed music and retain font licenses.
 - Protect production data and require authorization for test writes.

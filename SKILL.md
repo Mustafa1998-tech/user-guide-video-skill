@@ -83,6 +83,37 @@ Do not send application screenshots or data to a narration provider. Send only t
 - When an introduction and ending are requested, use the same identity and reveal the logo, organization, and title progressively. Durations such as 8–12 seconds are examples, not universal requirements.
 - Do not present a proposed tagline as an officially approved slogan.
 
+## Arrows: color, placement, and motion
+
+These are recommended production defaults, not claims about every existing video. Adapt them to the application's density and the user's reference while keeping one consistent annotation style throughout a delivery.
+
+### Appearance
+
+- Use **red `#D52424`** for the instructional arrow, with a **white `#FFFFFF` outline** to separate it from both light and dark interfaces. Keep the application's own colors and logo unchanged.
+- At 1920×1080, start with a 5 px shaft, 2 px white outline, 18 px arrowhead, and approximately 90–160 px total length. Scale these values proportionally to the output resolution and check readability at phone size.
+- A small black shadow at roughly 18% opacity with 3 px blur is optional. Do not add neon glow, heavy 3D effects, emoji, or a text arrow glyph. Draw the annotation as a clean vector path or a high-resolution transparent layer.
+- Distinguish the tutorial arrow from the actual mouse pointer: the arrow explains the target; the pointer indicates navigation or an actual click. Avoid showing both when they obscure the same control.
+
+### Placement and coordinates
+
+- Point at the edge of the actual button, field, or link, leaving about 6–12 px clearance at Full HD. Do not cover its label, typed value, icon, focus outline, validation message, or captions.
+- Prefer a diagonal or short curved path from nearby empty space. Display one instructional arrow per action. For several actions, reveal arrows sequentially rather than leaving a collection on screen.
+- Save a target rectangle and an anchor relative to the source capture. Apply the same crop, scaling, pan, and zoom transform to the arrow tip as to the screenshot. Never hard-code a fixed screen coordinate for a moving zoom.
+- Before additional zoom/pan, a simple crop-and-scale mapping is `screenX = offsetX + scale * (sourceX - cropX)` and likewise for Y. Apply any later animation transform too, and check the actual encoded frame.
+- RTL/LTR affects annotation text layout, not the real target location. Do not mirror an arrow automatically merely because the narration language changes.
+
+### Timing and movement
+
+1. Let the relevant screen settle. Fade the arrow in over approximately 0.15–0.25 seconds.
+2. If movement helps explain the action, move the tip toward its target once over approximately 0.35–0.65 seconds using eased motion. Do not bounce, shake, spin, or repeat the movement continuously.
+3. A useful easing function is `e = (1 - cos(pi * u)) / 2`, where `u` is elapsed progress clamped to 0–1. Interpolate position using `p = start + (end - start) * e`. For a curved path, evaluate the curve at eased progress and orient the arrowhead along its tangent.
+4. Complete the movement as the narrator names the target or says “click here.” Derive this cue from the narration timeline or a reviewed word boundary; do not apply the same arbitrary delay to every scene.
+5. Hold the arrow still while the viewer reads the control and hears the instruction. A 1–2 second hold can be a starting point, but the spoken instruction and target readability determine the actual duration.
+6. If depicting a click, show a single subtle ring for about 0.3–0.5 seconds at the target, synchronized to the cue. This annotation must not imply that a real action or successful save occurred when it did not.
+7. Fade the arrow out over approximately 0.15–0.25 seconds before switching targets or scenes. In a reduced-motion version, replace travel/zoom with a static arrow and a gentle fade; avoid pulsing or flashing.
+
+Store color, dimensions, source rectangle, anchor, path, cue, entrance duration, hold, and exit duration in editable storyboard/render settings. Preview the arrow at the start, during zoom, at the cue, and at the end. Confirm it remains attached to the correct element, within frame, and readable on both themes without hiding captions or interface content.
+
 ## Audio and music
 
 Use original or appropriately licensed music, retaining its source or generation method. Do not imitate a specific protected composition.
